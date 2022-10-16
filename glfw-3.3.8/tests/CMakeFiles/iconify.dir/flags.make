@@ -4,7 +4,7 @@
 # compile C with /Library/Developer/CommandLineTools/usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/deps -I/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/include
+C_INCLUDES = -I/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/deps -I/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/include
 
 C_FLAGSarm64 =  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu99
 

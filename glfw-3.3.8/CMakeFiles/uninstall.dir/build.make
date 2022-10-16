@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.24.2/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yeonseong/openGL/t/03_triangle
+CMAKE_SOURCE_DIR = /Users/yeonseong/openGL/opengl_wrapper
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yeonseong/openGL/t/03_triangle
+CMAKE_BINARY_DIR = /Users/yeonseong/openGL/opengl_wrapper
 
 # Utility rule file for uninstall.
 
@@ -67,7 +67,7 @@ include glfw-3.3.8/CMakeFiles/uninstall.dir/compiler_depend.make
 include glfw-3.3.8/CMakeFiles/uninstall.dir/progress.make
 
 glfw-3.3.8/CMakeFiles/uninstall:
-	cd /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8 && /opt/homebrew/Cellar/cmake/3.24.2/bin/cmake -P /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/cmake_uninstall.cmake
+	cd /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8 && /opt/homebrew/Cellar/cmake/3.24.2/bin/cmake -P /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/cmake_uninstall.cmake
 
 uninstall: glfw-3.3.8/CMakeFiles/uninstall
 uninstall: glfw-3.3.8/CMakeFiles/uninstall.dir/build.make
@@ -78,10 +78,10 @@ glfw-3.3.8/CMakeFiles/uninstall.dir/build: uninstall
 .PHONY : glfw-3.3.8/CMakeFiles/uninstall.dir/build
 
 glfw-3.3.8/CMakeFiles/uninstall.dir/clean:
-	cd /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8 && $(CMAKE_COMMAND) -P CMakeFiles/uninstall.dir/cmake_clean.cmake
+	cd /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8 && $(CMAKE_COMMAND) -P CMakeFiles/uninstall.dir/cmake_clean.cmake
 .PHONY : glfw-3.3.8/CMakeFiles/uninstall.dir/clean
 
 glfw-3.3.8/CMakeFiles/uninstall.dir/depend:
-	cd /Users/yeonseong/openGL/t/03_triangle && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yeonseong/openGL/t/03_triangle /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8 /Users/yeonseong/openGL/t/03_triangle /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8 /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/yeonseong/openGL/opengl_wrapper && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yeonseong/openGL/opengl_wrapper /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8 /Users/yeonseong/openGL/opengl_wrapper /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8 /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : glfw-3.3.8/CMakeFiles/uninstall.dir/depend
 

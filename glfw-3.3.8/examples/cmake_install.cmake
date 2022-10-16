@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/examples
+# Install script for directory: /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/examples
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.24.2/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yeonseong/openGL/t/03_triangle
+CMAKE_SOURCE_DIR = /Users/yeonseong/openGL/opengl_wrapper
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yeonseong/openGL/t/03_triangle
+CMAKE_BINARY_DIR = /Users/yeonseong/openGL/opengl_wrapper
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,9 +132,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yeonseong/openGL/t/03_triangle/CMakeFiles /Users/yeonseong/openGL/t/03_triangle//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yeonseong/openGL/opengl_wrapper/CMakeFiles /Users/yeonseong/openGL/opengl_wrapper//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yeonseong/openGL/t/03_triangle/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yeonseong/openGL/opengl_wrapper/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -162,17 +162,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named HelloTriangle
+# Target rules for targets named HelloWrapper
 
 # Build rule for target.
-HelloTriangle: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 HelloTriangle
-.PHONY : HelloTriangle
+HelloWrapper: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 HelloWrapper
+.PHONY : HelloWrapper
 
 # fast build rule for target.
-HelloTriangle/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangle.dir/build.make CMakeFiles/HelloTriangle.dir/build
-.PHONY : HelloTriangle/fast
+HelloWrapper/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloWrapper.dir/build.make CMakeFiles/HelloWrapper.dir/build
+.PHONY : HelloWrapper/fast
 
 #=============================================================================
 # Target rules for targets named uninstall
@@ -595,7 +595,7 @@ source/glad.o: source/glad.c.o
 
 # target to build an object file
 source/glad.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangle.dir/build.make CMakeFiles/HelloTriangle.dir/source/glad.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloWrapper.dir/build.make CMakeFiles/HelloWrapper.dir/source/glad.c.o
 .PHONY : source/glad.c.o
 
 source/glad.i: source/glad.c.i
@@ -603,7 +603,7 @@ source/glad.i: source/glad.c.i
 
 # target to preprocess a source file
 source/glad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangle.dir/build.make CMakeFiles/HelloTriangle.dir/source/glad.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloWrapper.dir/build.make CMakeFiles/HelloWrapper.dir/source/glad.c.i
 .PHONY : source/glad.c.i
 
 source/glad.s: source/glad.c.s
@@ -611,7 +611,7 @@ source/glad.s: source/glad.c.s
 
 # target to generate assembly for a file
 source/glad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangle.dir/build.make CMakeFiles/HelloTriangle.dir/source/glad.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloWrapper.dir/build.make CMakeFiles/HelloWrapper.dir/source/glad.c.s
 .PHONY : source/glad.c.s
 
 source/main.o: source/main.cpp.o
@@ -619,7 +619,7 @@ source/main.o: source/main.cpp.o
 
 # target to build an object file
 source/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangle.dir/build.make CMakeFiles/HelloTriangle.dir/source/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloWrapper.dir/build.make CMakeFiles/HelloWrapper.dir/source/main.cpp.o
 .PHONY : source/main.cpp.o
 
 source/main.i: source/main.cpp.i
@@ -627,7 +627,7 @@ source/main.i: source/main.cpp.i
 
 # target to preprocess a source file
 source/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangle.dir/build.make CMakeFiles/HelloTriangle.dir/source/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloWrapper.dir/build.make CMakeFiles/HelloWrapper.dir/source/main.cpp.i
 .PHONY : source/main.cpp.i
 
 source/main.s: source/main.cpp.s
@@ -635,7 +635,7 @@ source/main.s: source/main.cpp.s
 
 # target to generate assembly for a file
 source/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloTriangle.dir/build.make CMakeFiles/HelloTriangle.dir/source/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloWrapper.dir/build.make CMakeFiles/HelloWrapper.dir/source/main.cpp.s
 .PHONY : source/main.cpp.s
 
 # Help Target
@@ -652,7 +652,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... uninstall"
 	@echo "... update_mappings"
-	@echo "... HelloTriangle"
+	@echo "... HelloWrapper"
 	@echo "... boing"
 	@echo "... clipboard"
 	@echo "... cursor"

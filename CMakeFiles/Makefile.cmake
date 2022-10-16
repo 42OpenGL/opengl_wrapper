@@ -135,7 +135,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/HelloTriangle.dir/DependInfo.cmake"
+  "CMakeFiles/HelloWrapper.dir/DependInfo.cmake"
   "glfw-3.3.8/CMakeFiles/uninstall.dir/DependInfo.cmake"
   "glfw-3.3.8/src/CMakeFiles/update_mappings.dir/DependInfo.cmake"
   "glfw-3.3.8/src/CMakeFiles/glfw.dir/DependInfo.cmake"

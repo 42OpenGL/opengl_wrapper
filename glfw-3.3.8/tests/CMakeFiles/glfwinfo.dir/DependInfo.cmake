@@ -8,15 +8,15 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/deps/getopt.c" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.o" "gcc" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.o.d"
-  "/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/deps/glad_gl.c" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_gl.c.o" "gcc" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_gl.c.o.d"
-  "/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/deps/glad_vulkan.c" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_vulkan.c.o" "gcc" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_vulkan.c.o.d"
-  "/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/tests/glfwinfo.c" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/glfwinfo.c.o" "gcc" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/glfwinfo.c.o.d"
+  "/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/deps/getopt.c" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.o" "gcc" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.o.d"
+  "/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/deps/glad_gl.c" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_gl.c.o" "gcc" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_gl.c.o.d"
+  "/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/deps/glad_vulkan.c" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_vulkan.c.o" "gcc" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/__/deps/glad_vulkan.c.o.d"
+  "/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/tests/glfwinfo.c" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/glfwinfo.c.o" "gcc" "glfw-3.3.8/tests/CMakeFiles/glfwinfo.dir/glfwinfo.c.o.d"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/src/CMakeFiles/glfw.dir/DependInfo.cmake"
+  "/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

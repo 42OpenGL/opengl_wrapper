@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yeonseong/openGL/t/03_triangle
+# Install script for directory: /Users/yeonseong/openGL/opengl_wrapper
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/cmake_install.cmake")
+  include("/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/yeonseong/openGL/t/03_triangle/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/yeonseong/openGL/opengl_wrapper/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

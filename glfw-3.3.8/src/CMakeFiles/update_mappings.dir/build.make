@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.24.2/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yeonseong/openGL/t/03_triangle
+CMAKE_SOURCE_DIR = /Users/yeonseong/openGL/opengl_wrapper
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yeonseong/openGL/t/03_triangle
+CMAKE_BINARY_DIR = /Users/yeonseong/openGL/opengl_wrapper
 
 # Utility rule file for update_mappings.
 
@@ -67,8 +67,8 @@ include glfw-3.3.8/src/CMakeFiles/update_mappings.dir/compiler_depend.make
 include glfw-3.3.8/src/CMakeFiles/update_mappings.dir/progress.make
 
 glfw-3.3.8/src/CMakeFiles/update_mappings:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/yeonseong/openGL/t/03_triangle/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Updating gamepad mappings from upstream repository"
-	cd /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/src && /opt/homebrew/Cellar/cmake/3.24.2/bin/cmake -P /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/CMake/GenerateMappings.cmake mappings.h.in mappings.h
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/yeonseong/openGL/opengl_wrapper/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Updating gamepad mappings from upstream repository"
+	cd /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/src && /opt/homebrew/Cellar/cmake/3.24.2/bin/cmake -P /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/CMake/GenerateMappings.cmake mappings.h.in mappings.h
 
 update_mappings: glfw-3.3.8/src/CMakeFiles/update_mappings
 update_mappings: glfw-3.3.8/src/CMakeFiles/update_mappings.dir/build.make
@@ -79,10 +79,10 @@ glfw-3.3.8/src/CMakeFiles/update_mappings.dir/build: update_mappings
 .PHONY : glfw-3.3.8/src/CMakeFiles/update_mappings.dir/build
 
 glfw-3.3.8/src/CMakeFiles/update_mappings.dir/clean:
-	cd /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/src && $(CMAKE_COMMAND) -P CMakeFiles/update_mappings.dir/cmake_clean.cmake
+	cd /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/src && $(CMAKE_COMMAND) -P CMakeFiles/update_mappings.dir/cmake_clean.cmake
 .PHONY : glfw-3.3.8/src/CMakeFiles/update_mappings.dir/clean
 
 glfw-3.3.8/src/CMakeFiles/update_mappings.dir/depend:
-	cd /Users/yeonseong/openGL/t/03_triangle && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yeonseong/openGL/t/03_triangle /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/src /Users/yeonseong/openGL/t/03_triangle /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/src /Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/src/CMakeFiles/update_mappings.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/yeonseong/openGL/opengl_wrapper && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yeonseong/openGL/opengl_wrapper /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/src /Users/yeonseong/openGL/opengl_wrapper /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/src /Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/src/CMakeFiles/update_mappings.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : glfw-3.3.8/src/CMakeFiles/update_mappings.dir/depend
 

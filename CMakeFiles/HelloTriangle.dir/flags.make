@@ -3,17 +3,17 @@
 
 # compile C with /Library/Developer/CommandLineTools/usr/bin/cc
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
-C_DEFINES = -DROOT_PATH=\"/Users/yeonseong/openGL/t/03_triangle\"
+C_DEFINES = -DROOT_PATH=\"/Users/yeonseong/openGL/opengl_wrapper\"
 
-C_INCLUDES = -I/Users/yeonseong/openGL/t/03_triangle/include -I/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/include
+C_INCLUDES = -I/Users/yeonseong/openGL/opengl_wrapper/include -I/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/include
 
 C_FLAGSarm64 =  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
 
 C_FLAGS =  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
 
-CXX_DEFINES = -DROOT_PATH=\"/Users/yeonseong/openGL/t/03_triangle\"
+CXX_DEFINES = -DROOT_PATH=\"/Users/yeonseong/openGL/opengl_wrapper\"
 
-CXX_INCLUDES = -I/Users/yeonseong/openGL/t/03_triangle/include -I/Users/yeonseong/openGL/t/03_triangle/glfw-3.3.8/include
+CXX_INCLUDES = -I/Users/yeonseong/openGL/opengl_wrapper/include -I/Users/yeonseong/openGL/opengl_wrapper/glfw-3.3.8/include
 
 CXX_FLAGSarm64 =  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu++17
 
