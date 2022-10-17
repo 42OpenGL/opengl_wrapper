@@ -1,3 +1,5 @@
+#progrma once
+
 std::string file_loader(const std::filesystem::path& file_name)
 {
 	std::ifstream ifs(file_name);

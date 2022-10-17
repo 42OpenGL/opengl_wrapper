@@ -1,3 +1,5 @@
+#progrma once
+
 class ShaderProgram
 {
     private:
