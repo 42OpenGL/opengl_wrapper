@@ -152,66 +152,73 @@ public :
 };
 
 
-GLuint complie_shader(const filesystem::path& vertex_shader_path, const filesystem::path& fragment_shader_path)
+class ShaderProgram
 {
-	GLuint shader_program;
-	{
+    private:
 		GLuint vertex_shader;
 		GLuint fragment_shader;
-		// 버텍스 셰이더
-        Shader s(vertex_shader_path, GL_VERTEX_SHADER);
-        vertex_shader = s.getShader();
-		// 프래그먼트 셰이더
+       	GLuint shader_program; 
+        ShaderProgram() {};
+    public:
+        ShaderProgram(GLuint vertex_shader_data, GLuint fragment_shader_data)
+        {
+			this->vertex_shader = vertex_shader_data;
+			this->fragment_shader = fragment_shader_data;
+            this->shader_program = glCreateProgram();
+            glAttachShader(this->shader_program, this->vertex_shader); 
+            glAttachShader(this->shader_program, this->fragment_shader);
+            glLinkProgram(this->shader_program);
+            int success;
+            glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
+            if (!success)
+            {
+                char log[512];
+                glGetProgramInfoLog(shader_program, 512, nullptr, log);
+                throw ShaderProgramException(std::string("ERROR: Failed to link shader program:\n") + log); 
+            }
+        }
+        ~ShaderProgram()
+        {
+            glDeleteProgram(this->shader_program);
+        }
 
-		{
-			fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-			string shader_source = file_loader(fragment_shader_path);
-			const char* shader_source_ptr = shader_source.data();
-			glShaderSource(fragment_shader, 1, &shader_source_ptr, nullptr);
-			glCompileShader(fragment_shader);
-			int success;
-			glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
-			if (!success)
-			{
-				char log[512];
-				glGetShaderInfoLog(fragment_shader, 512, nullptr, log);
-				throw string("Error: Failed to compile fragment shader:\n") + log;
-			}
-		}
-		// 셰이더 프로그램 링크
-		{
-			shader_program = glCreateProgram();
-			glAttachShader(shader_program, vertex_shader);
-			glAttachShader(shader_program, fragment_shader);
-			glLinkProgram(shader_program);
-			int success;
-			glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
-			if (!success)
-			{
-				char log[512];
-				glGetProgramInfoLog(shader_program, 512, nullptr, log);
-				throw string("Error: Failed to link shader program:\n") + log;
-			}
-		}
-		glDeleteShader(vertex_shader);
-		glDeleteShader(fragment_shader);
-	}
-	return shader_program;
-}
+        GLuint getShaderProgram()
+        {
+            return this->shader_program;
+        }
+
+        class ShaderProgramException: public std::exception
+        {
+            private:
+                std::string m_errMessage;
+
+            public:
+                ShaderProgramException(const std::string &errMessage)
+                {
+                    this->m_errMessage = errMessage;	
+                }
+
+                const char *what() const _NOEXCEPT
+                {
+                    return (this->m_errMessage).c_str();
+                }
+	    };
+};
+
 
 
 int main_process()
 {
-    GLWindowWrapper w;
+    GLWindowWrapper window_instance;
+    Shader          vertex_shader(filesystem::path(ROOT_PATH) / "source/basic.vert", GL_VERTEX_SHADER);
+    Shader          fragment_shader(filesystem::path(ROOT_PATH) / "source/basic.frag", GL_FRAGMENT_SHADER);
+    GLuint          vertex_shader_data = vertex_shader.getShader();
+    GLuint          fragment_shader_data = fragment_shader.getShader();
+    ShaderProgram   shaderprogram_instance(vertex_shader_data, fragment_shader_data);
+    
+	GLFWwindow* window = window_instance.getWindow();
+	GLuint shader_program = shaderprogram_instance.getShaderProgram();
 
-	// GLFW 윈도우 초기화
-	GLFWwindow* window = w.getWindow();
-
-	// 셰이더
-	GLuint shader_program = complie_shader(
-		filesystem::path(ROOT_PATH) / "source/basic.vert",
-		filesystem::path(ROOT_PATH) / "source/basic.frag"
-	);
 
 	// 출력할 데이터
 	vector<Vertex> vertices = {
