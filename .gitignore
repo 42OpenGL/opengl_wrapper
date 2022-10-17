@@ -45,3 +45,7 @@ CTestTestfile.cmake
 _deps
 *.make
 *.internal
+
+
+# execute programe
+HelloWrapper
