@@ -56,8 +56,8 @@ public :
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		#endif
 
-		GLFWwindow* window = glfwCreateWindow(800, 600, "Hello Window", nullptr, nullptr);
-		if (window == NULL)
+		this->window = glfwCreateWindow(800, 600, "Hello Window", nullptr, nullptr);
+		if (this->window == NULL)
 		{
 			throw GLWindowWrapperException("Error: Failed to create GLFW window");
 		}
@@ -71,18 +71,19 @@ public :
 	class GLWindowWrapperException: public std::exception
 	{
         private:
-		    char* m_errMessage;
+		    std::string m_errMessage;
 
 		public:
-			GLWindowWrapperException(const std:string &errMessage)
+			GLWindowWrapperException(const std::string &errMessage)
 			{
 				this->m_errMessage = errMessage;	
 			}
 
-		    const char* what() const {
-			    return this->m_errMessage;
-		    };
-	}
+		    const char *what() const _NOEXCEPT
+            {
+			    return (this->m_errMessage).c_str();
+		    }
+	};
 
 	GLFWwindow* getWindow(){
 		return window;
