@@ -1,4 +1,4 @@
-#progrma once
+#pragma once
 
 class ShaderProgram
 {

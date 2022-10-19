@@ -1,4 +1,4 @@
-#progrma once
+#pragma once
 
 std::string file_loader(const std::filesystem::path& file_name)
 {
