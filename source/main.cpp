@@ -29,10 +29,10 @@ struct Vertex
 int main_process()
 {
     GLWindowWrapper window_instance;
-    Shader          vertex_shader(std::filesystem::path(ROOT_PATH) / "source/basic.vert", GL_VERTEX_SHADER);
-    Shader          fragment_shader(std::filesystem::path(ROOT_PATH) / "source/basic.frag", GL_FRAGMENT_SHADER);
-    GLuint          vertex_shader_data = vertex_shader.getShader();
-    GLuint          fragment_shader_data = fragment_shader.getShader();
+    Shader          vertex_shader_instance(std::filesystem::path(ROOT_PATH) / "source/basic.vert", GL_VERTEX_SHADER);
+    Shader          fragment_shader_instance(std::filesystem::path(ROOT_PATH) / "source/basic.frag", GL_FRAGMENT_SHADER);
+    GLuint          vertex_shader_data = vertex_shader_instance.getShader();
+    GLuint          fragment_shader_data = fragment_shader_instance.getShader();
     ShaderProgram   shaderprogram_instance(vertex_shader_data, fragment_shader_data);
 
 	GLFWwindow* window = window_instance.getWindow();
