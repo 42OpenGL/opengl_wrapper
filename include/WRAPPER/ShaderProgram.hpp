@@ -8,6 +8,7 @@ class ShaderProgram
        	GLuint shader_program; 
         ShaderProgram() {};
     public:
+    // TODO: shader 확장할 수 있게. initializer list or 가변인자
         ShaderProgram(GLuint vertex_shader_data, GLuint fragment_shader_data)
         {
 			this->vertex_shader = vertex_shader_data;

@@ -19,6 +19,7 @@ class GLWindowWrapper {
 			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 			#endif
 
+			// TODO: 창크기, 창이름
 			this->window = glfwCreateWindow(800, 600, "Hello Window", nullptr, nullptr);
 			if (this->window == NULL)
 			{
@@ -33,7 +34,6 @@ class GLWindowWrapper {
 		}
 		~GLWindowWrapper()
 		{
-			/*glDelete~~*/
 			glfwTerminate();
 		}
 
