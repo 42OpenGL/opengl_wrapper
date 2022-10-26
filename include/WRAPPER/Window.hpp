@@ -1,15 +1,20 @@
 #pragma once
+#include <exception>
 
 class GLWindowWrapper {
 	private:
-		GLFWwindow*	window;
+		int	_window_width;
+		int _window_height;
+		std::string	_window_name;
+		GLFWwindow*	_pwindow;
 
 	public :
-		GLWindowWrapper()
+		GLWindowWrapper(int width = 800, int height = 600, const std::string & name = "Hello world")
+		: _window_width(width), _window_height(height), _window_name(name)
 		{
 			if (!glfwInit())
 			{
-				throw GLWindowWrapperException("failed to initialize GLFW");
+				throw std::runtime_error("failed to initialize GLFW");
 			}
 			glfwWindowHint(GLFW_SAMPLES, 4); // 안티엘리어싱 x4
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // 최대버전: 그냥 glfw 버전
@@ -20,16 +25,16 @@ class GLWindowWrapper {
 			#endif
 
 			// TODO: 창크기, 창이름
-			this->window = glfwCreateWindow(800, 600, "Hello Window", nullptr, nullptr);
-			if (this->window == NULL)
+			this->_pwindow = glfwCreateWindow(_window_width, _window_height, _window_name.c_str(), nullptr, nullptr);
+			if (this->_pwindow == NULL)
 			{
-				throw GLWindowWrapperException("Error: Failed to create GLFW window");
+				throw std::runtime_error("Error: Failed to create GLFW window");
 			}
 			this->UseThisWindow();
 			// OpenGL 함수 포인터와 실제 함수를 매핑
 			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			{
-				throw GLWindowWrapperException("Error: Failed to initialize GLAD");
+				throw std::runtime_error("Error: Failed to initialize GLAD");
 			}
 		}
 		~GLWindowWrapper()
@@ -39,27 +44,10 @@ class GLWindowWrapper {
 
 		void UseThisWindow(void)
 		{
-			glfwMakeContextCurrent(this->window);
+			glfwMakeContextCurrent(this->_pwindow);
 		}
 		
 		GLFWwindow* getWindow(){
-			return window;
+			return _pwindow;
 		}
-
-		class GLWindowWrapperException: public std::exception
-		{
-			private:
-				std::string m_errMessage;
-
-			public:
-				GLWindowWrapperException(const std::string &errMessage)
-				{
-					this->m_errMessage = errMessage;	
-				}
-
-				const char *what() const _NOEXCEPT
-				{
-					return (this->m_errMessage).c_str();
-				}
-		};
 };
