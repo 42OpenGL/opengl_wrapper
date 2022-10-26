@@ -1,55 +1,45 @@
 #pragma once
+#include <exception>
+#include <vector>
 
 class ShaderProgram
 {
     private:
-		GLuint vertex_shader;
-		GLuint fragment_shader;
-       	GLuint shader_program; 
-        ShaderProgram() {};
+		std::vector<GLuint>  _shaders;
+       	GLuint               _shader_program; 
     public:
-    // TODO: shader 확장할 수 있게. initializer list or 가변인자
-        ShaderProgram(GLuint vertex_shader_data, GLuint fragment_shader_data)
+        ShaderProgram()
         {
-			this->vertex_shader = vertex_shader_data;
-			this->fragment_shader = fragment_shader_data;
-            this->shader_program = glCreateProgram();
-            glAttachShader(this->shader_program, this->vertex_shader); 
-            glAttachShader(this->shader_program, this->fragment_shader);
-            glLinkProgram(this->shader_program);
-            int success;
-            glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
-            if (!success)
-            {
-                char log[512];
-                glGetProgramInfoLog(shader_program, 512, nullptr, log);
-                throw ShaderProgramException(std::string("ERROR: Failed to link shader program:\n") + log); 
-            }
+            this->_shader_program = glCreateProgram();
+        }
+        explicit ShaderProgram(const std::vector<GLuint> & shaders) 
+        {
+            this->_shader_program = glCreateProgram();
+            std::vector<GLuint>::const_iterator it = shaders.begin();
+            for (; it < shaders.end() ; it++)
+                putShader(*it);
         }
         ~ShaderProgram()
         {
-            glDeleteProgram(this->shader_program);
+            glDeleteProgram(this->_shader_program);
+        }
+
+        void putShader(GLuint shader_data)
+        {
+            glAttachShader(this->_shader_program, shader_data);
         }
 
         GLuint getShaderProgram()
         {
-            return this->shader_program;
+            int success;
+            glLinkProgram(this->_shader_program);
+            glGetProgramiv(_shader_program, GL_LINK_STATUS, &success);
+            if (!success)
+            {
+                char log[512];
+                glGetProgramInfoLog(_shader_program, 512, nullptr, log);
+                throw std::runtime_error(std::string("ERROR: Failed to link shader program:\n") + log); 
+            }
+            return this->_shader_program;
         }
-
-        class ShaderProgramException: public std::exception
-        {
-            private:
-                std::string m_errMessage;
-
-            public:
-                ShaderProgramException(const std::string &errMessage)
-                {
-                    this->m_errMessage = errMessage;	
-                }
-
-                const char *what() const _NOEXCEPT
-                {
-                    return (this->m_errMessage).c_str();
-                }
-	    };
 };
