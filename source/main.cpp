@@ -22,12 +22,20 @@ void key_manager(GLFWwindow *window)
 
 int main_process()
 {
-    GLWindowWrapper window_instance;
+    GLWindowWrapper window_instance(600, 800, "hi");
     Shader          vertex_shader_instance(std::filesystem::path(ROOT_PATH) / "source/basic.vert", GL_VERTEX_SHADER);
     Shader          fragment_shader_instance(std::filesystem::path(ROOT_PATH) / "source/basic.frag", GL_FRAGMENT_SHADER);
     GLuint          vertex_shader_data = vertex_shader_instance.getShader();
     GLuint          fragment_shader_data = fragment_shader_instance.getShader();
-    ShaderProgram   shaderprogram_instance(vertex_shader_data, fragment_shader_data);
+
+    // ShaderProgram   shaderprogram_instance;
+	// shaderprogram_instance.putShader(vertex_shader_data);
+	// shaderprogram_instance.putShader(fragment_shader_data);
+
+	std::vector<GLuint> shaders_vector;
+	shaders_vector.push_back(vertex_shader_data);
+	shaders_vector.push_back(fragment_shader_data);
+	ShaderProgram shaderprogram_instance(shaders_vector);
 
 	GLFWwindow* window = window_instance.getWindow();
 	GLuint shader_program = shaderprogram_instance.getShaderProgram();
@@ -46,7 +54,6 @@ int main_process()
 		{{-0.5f,  0.5f,  0.0f}, {0.0f, 0.0f, 1.0f}},
 	};
 
-	
 	buffer_instance.setIndices(new_indices);
 	buffer_instance.setVertices(new_vertices);
 
