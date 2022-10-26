@@ -37,10 +37,10 @@ class Buffer
 				glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_obj);
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_obj);
 				
-				glEnableVertexAttribArray(0);
 				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-				glEnableVertexAttribArray(1);
+				glEnableVertexAttribArray(0);
 				glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+				glEnableVertexAttribArray(1);
 
 				glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * this->vertices.size(), this->vertices.data(), GL_STATIC_DRAW);
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * this->indices.size(), this->indices.data(), GL_STATIC_DRAW);
@@ -60,12 +60,13 @@ class Buffer
 			void setVertices(const std::vector<Vertex> &new_vertices)
 			{
 				std::cout << (long)&new_vertices[0] << std::endl;
+				// swap -> 보류. 
 				this->vertices = new_vertices;
 				std::cout << (long)&(this->vertices[0]) << std::endl;
 				glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * this->vertices.size(), this->vertices.data(), GL_STATIC_DRAW);
 			}
 
-			void setIndices(std::vector<GLuint> &new_indices)
+			void setIndices(const std::vector<GLuint> &new_indices)
 			{
 				this->indices = new_indices;
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * this->indices.size(), this->indices.data(), GL_STATIC_DRAW);
