@@ -40,8 +40,10 @@ int main_process()
 
 	Buffer			buffer_instance;
 
-	glm::mat4 trans = glm::mat4(1.0f);
-	trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
+	// FOR ROTATE
+	// glm::mat4 step = glm::mat4(1.0f);
+	// glm::mat4 trans = glm::mat4(1.0f);
+	// trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
 
 	std::vector<GLuint> new_indices = {
 		0, 2, 1,
@@ -58,8 +60,9 @@ int main_process()
 	buffer_instance.setIndices(new_indices);
 	buffer_instance.setVertices(new_vertices);
 
+	// FOR ROTATE
+	// glm::mat4 step = glm::mat4(1.0f);
 	// 렌더링 루프
-	glm::mat4 step = glm::mat4(1.0f);
 	while (!glfwWindowShouldClose(window))
 	{
 		key_manager(window);
@@ -69,9 +72,10 @@ int main_process()
 		glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		step = glm::rotate(step, (float)glm::radians(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		GLuint location = glGetUniformLocation(shader_program, "step");
-		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(step));
+		// FOR ROTATE
+		// step = glm::rotate(step, (float)glm::radians(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		// GLuint location = glGetUniformLocation(shader_program, "step");
+		// glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(step));
 
 		// 그리기
 		glUseProgram(shader_program);
