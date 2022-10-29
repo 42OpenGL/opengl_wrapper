@@ -38,9 +38,9 @@ int main_process()
 	GLFWwindow* window = window_instance.getWindow();
 	GLuint shader_program = shaderprogram_instance.getShaderProgram();
 
-	Buffer			buffer_instance;
+	Buffer buffer_instance;
 
-	// FOR ROTATE
+	// FOR TRANSLATE
 	// glm::mat4 step = glm::mat4(1.0f);
 	// glm::mat4 trans = glm::mat4(1.0f);
 	// trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
