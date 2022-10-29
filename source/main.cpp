@@ -28,10 +28,6 @@ int main_process()
     GLuint          vertex_shader_data = vertex_shader_instance.getShader();
     GLuint          fragment_shader_data = fragment_shader_instance.getShader();
 
-    // ShaderProgram   shaderprogram_instance;
-	// shaderprogram_instance.putShader(vertex_shader_data);
-	// shaderprogram_instance.putShader(fragment_shader_data);
-
 	std::vector<GLuint> shaders_vector;
 	shaders_vector.push_back(vertex_shader_data);
 	shaders_vector.push_back(fragment_shader_data);
@@ -44,7 +40,7 @@ int main_process()
 
 	std::vector<GLuint> new_indices = {
 		0, 2, 1,
-		1, 2, 3,
+		0, 3, 2,
 	};
 
 	std::vector<Vertex> new_vertices = {

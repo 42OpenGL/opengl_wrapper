@@ -9,9 +9,6 @@ struct Vertex
 class Buffer
 	{
 		private:
-		// TODO: inline 으로 초기화
-		// TODO: buffer에도 여러개 받을 수 있게 확장하기
-		// TODO: vertices가 다양함. -> 여러 vertices를 대응할 수 있도록
 			std::vector<Vertex> _vertices = {
 							{{ 0.5f,  0.5f,  0.0f}, {0.5f, 1.0f, 1.0f}},
 							{{ 0.5f, -0.5f,  0.0f}, {0.0f, 0.0f, 0.0f}},
