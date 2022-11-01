@@ -90,7 +90,12 @@ int main_process()
 		glm::mat4 view = glm::mat4(1.0f);
         float camX = static_cast<float>(sin(glfwGetTime()) * radius);
         float camZ = static_cast<float>(cos(glfwGetTime()) * radius);
-        view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		glm::vec3 up;
+		if (camX > 0)
+			up = glm::vec3(0.0f, 0.0f, 1.0f);
+		else
+			up = glm::vec3(0.0f, 0.0f, -1.0f);
+        view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), up);
 		GLuint view_location = glGetUniformLocation(shader_program, "view");
 		glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
 		// 그리기
