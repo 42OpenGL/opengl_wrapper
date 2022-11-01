@@ -14,11 +14,29 @@
 #include "../include/WRAPPER/Window.hpp"
 #include "../include/WRAPPER/Buffer.hpp"
 
+float camX = 0;
+float camY = 0;
+float camZ = 10;
+
 void key_manager(GLFWwindow *window)
 {
+	float step = 0.042;
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	{
 		glfwSetWindowShouldClose(window, true);
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		camY += step;
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		camX -= step;
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		camX += step;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		camY -= step;
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+			camZ -= step;
+		else
+			camZ += step;
 	}
 }
 
@@ -88,14 +106,12 @@ int main_process()
 
 		// camera move
 		glm::mat4 view = glm::mat4(1.0f);
-        float camX = static_cast<float>(sin(glfwGetTime()) * radius);
-        float camZ = static_cast<float>(cos(glfwGetTime()) * radius);
 		glm::vec3 up;
-		if (camX > 0)
-			up = glm::vec3(0.0f, 0.0f, 1.0f);
-		else
-			up = glm::vec3(0.0f, 0.0f, -1.0f);
-        view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), up);
+		// if (camX > 0)
+		// 	up = glm::vec3(0.0f, 0.0f, 1.0f);
+		// else
+		// 	up = glm::vec3(0.0f, 0.0f, -1.0f);
+        view = glm::lookAt(glm::vec3(camX, camY, camZ), glm::vec3(camX, camY, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) );
 		GLuint view_location = glGetUniformLocation(shader_program, "view");
 		glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
 		// 그리기
