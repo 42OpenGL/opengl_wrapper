@@ -61,7 +61,12 @@ int main_process()
 	buffer_instance.setVertices(new_vertices);
 
 	// FOR ROTATE
-	// glm::mat4 step = glm::mat4(1.0f);
+	glm::mat4 step = glm::mat4(1.0f);
+
+	glm::mat4 projection;
+	//FOR cam move
+	// make sure to initialize matrix to identity matrix first
+	float radius = 10.0f;
 	// 렌더링 루프
 	while (!glfwWindowShouldClose(window))
 	{
@@ -73,10 +78,21 @@ int main_process()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// FOR ROTATE
-		// step = glm::rotate(step, (float)glm::radians(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		// GLuint location = glGetUniformLocation(shader_program, "step");
-		// glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(step));
+		step = glm::rotate(step, (float)glm::radians(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+		GLuint location = glGetUniformLocation(shader_program, "step");
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(step));
 
+		projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+		GLuint projection_location = glGetUniformLocation(shader_program, "projection");
+		glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
+
+		// camera move
+		glm::mat4 view = glm::mat4(1.0f);
+        float camX = static_cast<float>(sin(glfwGetTime()) * radius);
+        float camZ = static_cast<float>(cos(glfwGetTime()) * radius);
+        view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		GLuint view_location = glGetUniformLocation(shader_program, "view");
+		glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
 		// 그리기
 		glUseProgram(shader_program);
 		glBindVertexArray(buffer_instance.getVAO());
