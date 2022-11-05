@@ -1,5 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
+#include <ft_glm/ft_rotate.hpp>
 
 class Camera
 {
@@ -88,7 +89,7 @@ void Camera::rotate(float rad, glm::vec3 axis)
 {
 	glm::vec3 eye_to_center = this->_center - this->_eye;
 
-	glm::mat4 rotate_mat = glm::rotate(glm::mat4(1.0f), rad, axis);
+	glm::mat4 rotate_mat = ft::rotate(glm::mat4(1.0f), rad, axis);
 	eye_to_center = glm::vec3( rotate_mat * glm::vec4(eye_to_center, 0) );
 
 	this->_center = this->_eye + eye_to_center;
