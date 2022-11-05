@@ -24,20 +24,28 @@ void key_manager(GLFWwindow *window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		camera_instance._eye.y += step;
+		camera_instance.move_up();
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camera_instance._eye.x -= step;
+		camera_instance.move_left();
 	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		camera_instance._eye.x += step;
+		camera_instance.move_right();
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		camera_instance._eye.y  -= step;
+		camera_instance.move_down();
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
 		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-			camera_instance._eye.z  -= step;
+			camera_instance.move_forward();
 		else
-			camera_instance._eye.z  += step;
+			camera_instance.move_backward();
 	}
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+		camera_instance.rotate(glm::radians(0.42f), glm::vec3(1.0f, 0.0f, 0.0f));
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+		camera_instance.rotate(glm::radians(-0.42f), glm::vec3(1.0f, 0.0f, 0.0f));
+	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
+		camera_instance.rotate(glm::radians(0.42f), glm::vec3(0.0f, 1.0f, 0.0f));
+	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+		camera_instance.rotate(glm::radians(-0.42f), glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 int main_process()
@@ -100,13 +108,12 @@ int main_process()
 		GLuint location = glGetUniformLocation(shader_program, "step");
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(step));
 
-		projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+		projection = glm::perspective(glm::radians(60.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 		GLuint projection_location = glGetUniformLocation(shader_program, "projection");
 		glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
 
 		// camera move
-		glm::mat4 view = glm::mat4(1.0f);
-        view = glm::lookAt(camera_instance._eye, camera_instance._center, camera_instance._up);
+        glm::mat4 view = camera_instance.lookAt();
 		GLuint view_location = glGetUniformLocation(shader_program, "view");
 		glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
 		// 그리기
