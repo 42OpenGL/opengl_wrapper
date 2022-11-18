@@ -1,4 +1,6 @@
 #pragma once
+#include <filesystem>
+#include <exception>
 
 std::string file_loader(const std::filesystem::path& file_name)
 {
@@ -31,7 +33,7 @@ class Shader {
 			{
 				char log[512];
 				glGetShaderInfoLog(m_shader, 512, nullptr, log); // 로그 확인
-				throw ShaderException(std::string("Error: Failed to compile vertex shader:\n") + log);
+				throw std::runtime_error(std::string("Error: Failed to compile vertex shader:\n") + log);
 			}
 		}
         ~Shader()
@@ -43,20 +45,4 @@ class Shader {
         {
             return this->m_shader;
         }
-
-        class ShaderException: public std::exception
-	    {
-            private:
-		        std::string errMessage;
-
-    		public:
-			ShaderException(const std::string& errMessage)
-			{
-				this->errMessage = errMessage;	
-			}
-            const char* what() const _NOEXCEPT
-            {
-                return (this->errMessage).c_str();
-            }
-	    };
 };

@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/HelloTriangle.dir/source/glad.c.o CMakeFiles/HelloTriangle.dir/source/main.cpp.o -o HelloTriangle  glfw-3.3.8/src/libglfw3.a -framework Cocoa -framework IOKit -framework CoreFoundation 

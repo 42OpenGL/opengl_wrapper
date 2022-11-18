@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-#include <glad/glad.h>
+#include <glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -16,7 +16,7 @@
 #include "../include/WRAPPER/Camera.hpp"
 
 
-Camera			camera_instance(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+Camera	camera_instance(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 void key_manager(GLFWwindow *window)
 {
@@ -125,7 +125,6 @@ int main_process()
 		glfwPollEvents();
 	}
 	glDeleteProgram(shader_program);
-	glfwTerminate();
 	return 0;
 }
 
