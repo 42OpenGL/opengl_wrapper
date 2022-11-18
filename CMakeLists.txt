@@ -16,7 +16,7 @@ if (APPLE)
 				"include/glad_mac"
 		)
 		add_subdirectory(
-				${GLWF_DIR}
+				${GLFW_DIR}
 		)
 else ()
 		set(GLAD_DIR
@@ -44,8 +44,8 @@ add_executable(${MY_VAR}
 target_include_directories(${MY_VAR}
 		PUBLIC
 		include
-		${GLFW_DIR}/include
 		${GLAD_DIR}
+		${GLFW_DIR}/include
 )
 
 if (APPLE)
