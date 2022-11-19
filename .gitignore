@@ -52,3 +52,4 @@ build/*
 
 # execute programe
 HelloWrapper
+ft_opengl
