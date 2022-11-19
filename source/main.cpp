@@ -15,6 +15,11 @@
 #include "../include/WRAPPER/Buffer.hpp"
 #include "../include/WRAPPER/Camera.hpp"
 
+// 3d model loading
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
 
 Camera	camera_instance(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
@@ -48,6 +53,35 @@ void key_manager(GLFWwindow *window)
 		camera_instance.rotate(glm::radians(-0.42f), glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
+// TODO: importer를 class화 하기
+void	DoTheSceneProcessing(const aiScene  &pScene)
+{
+	std::cout << &pScene << std::endl;
+}
+
+bool	Importer(const std::string &pFile)
+{
+	Assimp::Importer importer;
+
+	const aiScene *scene = importer.ReadFile(pFile, 
+	aiProcess_CalcTangentSpace       |
+    aiProcess_Triangulate            |
+    aiProcess_JoinIdenticalVertices  |
+    aiProcess_SortByPType);
+
+  // If the import failed, report it
+	if (scene == nullptr) {
+		std::cout << std::string(importer.GetErrorString()) << std::endl;
+    return false;
+	}
+
+  // Now we can access the file's contents.
+	DoTheSceneProcessing(*scene);
+
+  // We're done. Everything will be cleaned up by the importer destructor
+	return true;
+}
+
 int main_process()
 {
     GLWindowWrapper window_instance(600, 800, "hi");
@@ -70,6 +104,14 @@ int main_process()
 	// glm::mat4 step = glm::mat4(1.0f);
 	// glm::mat4 trans = glm::mat4(1.0f);
 	// trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
+	if (Importer("../asset/Dragon 2.5_fbx.fbx"))
+	{
+		std::cout << "SUCCESS" << std::endl;
+	}
+	else{
+		std::cout << "FAILED 🥲" << std::endl;
+	};
+
 
 	std::vector<GLuint> new_indices = {
 		0, 2, 1,

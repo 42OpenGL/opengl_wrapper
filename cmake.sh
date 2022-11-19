@@ -1,6 +1,6 @@
 #! /bin/sh
 
-cmake -Bbuild -DMY_VAR="FT_OPENGL"
+cmake -Bbuild -DMY_VAR="ft_opengl"
 
 echo "Cmake DONE!"
 
@@ -8,4 +8,4 @@ make -C ./build
 
 echo "make DONE!"
 
-mv ./build/FT_OPENGL ./
+mv ./build/ft_opengl ./
