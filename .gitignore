@@ -46,6 +46,9 @@ _deps
 *.make
 *.internal
 
+build/*
+**/*.html
+*.DS_Store
 
 # execute programe
 HelloWrapper
