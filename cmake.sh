@@ -9,3 +9,5 @@ make -C ./build
 echo "make DONE!"
 
 mv ./build/ft_opengl ./
+
+./ft_opengl
