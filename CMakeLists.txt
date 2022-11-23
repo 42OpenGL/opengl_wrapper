@@ -35,12 +35,14 @@ endif (APPLE)
 if (APPLE)
 		set(SOURCE_FILES
 				source/glad/glad_mac.c
-				source/main.cpp
+				#main.cpp
+				source/mesh_practice.cpp
 		)
 else ()
 		set(SOURCE_FILES
 				source/glad/glad_linux.c
-				source/main.cpp
+				#main.cpp
+				source/mesh_practice.cpp
 		)
 endif (APPLE)
 
