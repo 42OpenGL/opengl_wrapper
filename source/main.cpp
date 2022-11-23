@@ -6,8 +6,8 @@
 #include <glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "../include/WRAPPER/Shader.hpp"
 #include "../include/WRAPPER/ShaderProgram.hpp"
@@ -56,6 +56,7 @@ void key_manager(GLFWwindow *window)
 // TODO: importer를 class화 하기
 void	DoTheSceneProcessing(const aiScene  &pScene)
 {
+	
 	std::cout << &pScene << std::endl;
 }
 
@@ -104,6 +105,8 @@ int main_process()
 	// glm::mat4 step = glm::mat4(1.0f);
 	// glm::mat4 trans = glm::mat4(1.0f);
 	// trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
+
+	// model loading
 	if (Importer(std::filesystem::path(ROOT_PATH) / "asset/Dragon 2.5_fbx.fbx"))
 	{
 		std::cout << "SUCCESS" << std::endl;
