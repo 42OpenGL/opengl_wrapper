@@ -25,6 +25,10 @@ if (APPLE)
 		add_subdirectory(
 				${ASSIMP_DIR}
 		)
+elseif(WIN32)
+		set(GLAD_DIR
+				"include/glad_windows"
+		)
 else ()
 		set(GLAD_DIR
 				"include/glad_linux"
@@ -35,6 +39,11 @@ endif (APPLE)
 if (APPLE)
 		set(SOURCE_FILES
 				source/glad/glad_mac.c
+				source/main.cpp
+		)
+elseif(WIN32)
+		set(SOURCE_FILES
+				source/glad/glad_windows.c
 				source/main.cpp
 		)
 else ()
