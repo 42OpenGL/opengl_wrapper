@@ -10,25 +10,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "-g3")
 
 if (APPLE)
-	set(GLFW_DIR
-		"glfw-3.3.8"
-	)
-	set(ASSIMP_DIR
-		"assimp"
-	)
-	set(GLAD_DIR
-		"include/glad_mac"
-	)
-	add_subdirectory(
-		${GLFW_DIR}
-	)
-	add_subdirectory(
-		${ASSIMP_DIR}
-	)
+	set(GLFW_DIR "glfw-3.3.8")
+	set(ASSIMP_DIR "assimp")
+	set(GLAD_DIR "include/glad_mac")
+	add_subdirectory(${GLFW_DIR})
+	add_subdirectory(${ASSIMP_DIR})
 else ()
-	set(GLAD_DIR
-		"include/glad_linux"
-	)
+	set(GLAD_DIR "include/glad_linux")
 endif (APPLE)
 
 
@@ -46,9 +34,7 @@ else ()
 	)
 endif (APPLE)
 
-add_executable(${MY_VAR}
-		${SOURCE_FILES}
-)
+add_executable(${MY_VAR} ${SOURCE_FILES})
 
 target_include_directories(${MY_VAR}
 	PUBLIC
