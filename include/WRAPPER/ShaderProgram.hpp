@@ -29,7 +29,7 @@ class ShaderProgram
             glAttachShader(this->_shader_program, shader_data);
         }
 
-        GLuint getShaderProgram()
+        GLuint getShaderProgram() const
         {
             int success;
             glLinkProgram(this->_shader_program);

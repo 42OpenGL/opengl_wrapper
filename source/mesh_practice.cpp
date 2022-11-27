@@ -20,6 +20,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#include "../include/model/Model.hpp"
 
 Camera	camera_instance(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
@@ -52,58 +53,21 @@ void key_manager(GLFWwindow *window)
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
 		camera_instance.rotate(glm::radians(-0.42f), glm::vec3(0.0f, 1.0f, 0.0f));
 }
-
-// TODO: importer를 class화 하기
-//void	DoTheSceneProcessing(const aiScene  &pScene)
-//{
-	
-//	std::cout << &pScene << std::endl;
-//}
-
-const aiScene *Importer(const std::string &pFile)
-{
-	Assimp::Importer importer;
-
-	const aiScene * scene = importer.ReadFile(pFile, 
-	aiProcess_CalcTangentSpace       |
-	aiProcess_Triangulate            |
-	aiProcess_JoinIdenticalVertices  |
-	aiProcess_SortByPType);
-
-	if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
-	{
-		std::cout << std::string(importer.GetErrorString()) << std::endl;
-		return nullptr;
-	}
-	// TODO: scene에 불러온값들 파싱하기.!
-	// Now we can access the file's contents.
-	//DoTheSceneProcessing(*scene);
-
-  // We're done. Everything will be cleaned up by the importer destructor
-	return scene;
-}
-
+ 
 int main_process()
 {
-    GLWindowWrapper window_instance(600, 800, "hi");
-
+    GLWindowWrapper window_instance(800, 600, "backpack");
 	GLFWwindow* window = window_instance.getWindow();
+	Shader	vertex_shader_instance(std::filesystem::path(ROOT_PATH)/"source/assimp_shader.vert", GL_VERTEX_SHADER);
+	Shader	fragment_shader_instance(std::filesystem::path(ROOT_PATH)/"source/assimp_shader.frag", GL_FRAGMENT_SHADER);
+	std::vector<GLuint> shader_vector = {vertex_shader_instance.getShader(), fragment_shader_instance.getShader()};
+	ShaderProgram	shader_program_instance(shader_vector);
+	GLuint			shader_program = shader_program_instance.getShaderProgram();
 
-
-	const aiScene * scene = Importer(std::filesystem::path(ROOT_PATH) / "asset/model2_coin.fbx");
-	if (scene)
-	{
-		std::cout << "SUCCESS" << std::endl;
-	}
-	else{
-		std::cout << "FAILED 🥲" << std::endl;
-		std::exit(1);
-	};
-
-	// Mesh part
-	
-	return(EXIT_SUCCESS);
+	Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/Survival_BackPack_2/Survival_BackPack_2.fbx");
+		
 	// 렌더링 루프
+	glm::mat4 projection;
 	while (!glfwWindowShouldClose(window))
 	{
 		key_manager(window);
@@ -113,12 +77,23 @@ int main_process()
 		glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		
-		// 그리기
-		// glUseProgram(shader_program);
-		//glBindVertexArray(buffer_instance.getVAO());
-		//glDrawElements(GL_TRIANGLES, buffer_instance.getIndices().size(), GL_UNSIGNED_INT, nullptr);
+		projection = glm::perspective(glm::radians(60.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+		GLuint projection_location = glGetUniformLocation(shader_program, "projection");
+		glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
 
+		// camera move
+        glm::mat4 view = camera_instance.lookAt();
+		GLuint view_location = glGetUniformLocation(shader_program, "view");
+		glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
+
+		glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+		GLuint model_location = glGetUniformLocation(shader_program, "model");
+		glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(model));	
+		
+		glUseProgram(shader_program);
+		model_instance.Draw(shader_program_instance);		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

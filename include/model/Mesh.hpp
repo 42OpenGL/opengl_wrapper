@@ -14,32 +14,33 @@ struct MeshVertex
 	glm::vec3 Position;
 	glm::vec3 Normal;
 	glm::vec2 TexCoords;
-}
+};
 
 struct MeshTexture
 {
 	GLuint			id;
-	std::string		type;	
-}
+	std::string		type;
+	std::string		path;
+};
 
 class Mesh 
 {
-	private :
-		typedef std::vector<MeshVertex> 	vertices_t;
-		typedef std::vector<GLuint>			indicies_t;
-		typedef std::vector<MeshTexture> 	textures_t;
-	private:
-		//  render data
-		GLuint	_VAO, _VBO, _EBO;
-		void setupMesh();
-	public:
-		// mesh data
-		vertices_t	vertices;
-		indicies_t	indices;
-		textures_t	textures;
+private :
+	typedef std::vector<MeshVertex> 	vertices_t;
+	typedef std::vector<GLuint>			indicies_t;
+	typedef std::vector<MeshTexture> 	textures_t;
+private:
+	//  render data
+	GLuint	_VAO, _VBO, _EBO;
+	void setupMesh();
+public:
+	// mesh data
+	vertices_t	vertices;
+	indicies_t	indices;
+	textures_t	textures;
 
-		Mesh(vertices_t vertices, indicies_t indices, textures_t textures);
-		void Draw(const ShaderProgram & shaderprogram);
+	Mesh(vertices_t vertices, indicies_t indices, textures_t textures);
+	void Draw(const ShaderProgram & shaderprogram);
 };
 
 Mesh::Mesh(vertices_t vertices, indicies_t indices, textures_t textures)
@@ -95,7 +96,7 @@ void Mesh::Draw(const ShaderProgram &shaderprogram)
 			number = std::to_string(specularNr++);
 
 		GLuint shaderID = shaderprogram.getShaderProgram();
-		glUniform1i(glGetUniformLocation(shaderID, (name + number).c_str()), i)
+		glUniform1i(glGetUniformLocation(shaderID, (name + number).c_str()), i);
 		glBindTexture(GL_TEXTURE_2D, textures[i].id);
 	}
 	glActiveTexture(GL_TEXTURE0);
