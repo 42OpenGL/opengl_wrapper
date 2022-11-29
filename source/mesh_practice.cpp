@@ -64,7 +64,7 @@ int main_process()
 	ShaderProgram	shader_program_instance(shader_vector);
 	GLuint			shader_program = shader_program_instance.getShaderProgram();
 
-	Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/Survival_BackPack_2/Survival_BackPack_2.fbx");
+	Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/backpack/backpack.obj");
 		
 	// 렌더링 루프
 	glm::mat4 projection;

@@ -58,7 +58,19 @@
 		"type_traits": "cpp",
 		"typeinfo": "cpp",
 		"variant": "cpp",
-		"vector": "cpp"
+		"vector": "cpp",
+		"__hash_table": "cpp",
+		"__node_handle": "cpp",
+		"__tree": "cpp",
+		"array": "cpp",
+		"codecvt": "cpp",
+		"list": "cpp",
+		"map": "cpp",
+		"numeric": "cpp",
+		"optional": "cpp",
+		"set": "cpp",
+		"unordered_map": "cpp",
+		"unordered_set": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }
