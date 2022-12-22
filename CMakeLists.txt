@@ -29,8 +29,9 @@ if (APPLE)
 else ()
 	set(SOURCE_FILES
 		source/glad/glad_linux.c
-		source/mesh_practice.cpp
+		#source/mesh_practice.cpp
 		#main.cpp
+		source/camera_move_test.cpp
 	)
 endif (APPLE)
 

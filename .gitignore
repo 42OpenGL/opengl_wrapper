@@ -49,6 +49,7 @@ _deps
 build/*
 **/*.html
 *.DS_Store
+.vscode/*
 
 # execute programe
 HelloWrapper
