@@ -23,16 +23,12 @@ endif (APPLE)
 if (APPLE)
 	set(SOURCE_FILES
 		source/glad/glad_mac.c
-		#source/mesh_practice.cpp
-		source/camera_move_test.cpp
-		#main.cpp
+		source/model_load.cpp
 	)
 else ()
 	set(SOURCE_FILES
 		source/glad/glad_linux.c
-		#source/mesh_practice.cpp
-		#main.cpp
-		source/camera_move_test.cpp
+		source/model_load.cpp
 	)
 endif (APPLE)
 
