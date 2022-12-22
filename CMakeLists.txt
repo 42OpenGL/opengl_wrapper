@@ -26,8 +26,20 @@ if (APPLE)
 				${ASSIMP_DIR}
 		)
 elseif(WIN32)
+		set(GLFW_DIR
+				"glfw-3.3.8"
+		)
+		set(ASSIMP_DIR
+				"assimp"
+		)
 		set(GLAD_DIR
-				"include/glad_windows"
+				"include/glad_win"
+		)
+		add_subdirectory(
+				${GLFW_DIR}
+		)
+		add_subdirectory(
+				${ASSIMP_DIR}
 		)
 else ()
 		set(GLAD_DIR
@@ -43,7 +55,7 @@ if (APPLE)
 		)
 elseif(WIN32)
 		set(SOURCE_FILES
-				source/glad/glad_windows.c
+				source/glad/glad_win.c
 				source/main.cpp
 		)
 else ()
@@ -66,6 +78,13 @@ target_include_directories(${MY_VAR}
 )
 
 if (APPLE)
+		target_link_libraries(${MY_VAR}
+				glfw
+		)
+		target_link_libraries(${MY_VAR}
+				assimp
+		)
+elseif (WIN32)
 		target_link_libraries(${MY_VAR}
 				glfw
 		)

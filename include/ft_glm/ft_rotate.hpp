@@ -1,6 +1,6 @@
 #pragma once
 
-#include <glm/glm.hpp>
+#include <glm/glm/glm.hpp>
 
 /*
     1. axis를 기준으로 rad만큼 돌아가는 행렬을 구한다.
