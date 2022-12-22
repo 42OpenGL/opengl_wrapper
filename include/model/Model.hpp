@@ -86,7 +86,6 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		vector.y = mesh->mVertices[i].y;
 		vector.z = mesh->mVertices[i].z; 
 		vertex.Position = vector;
-		vertices.push_back(vertex);
 
 		vector.x = mesh->mNormals[i].x;
 		vector.y = mesh->mNormals[i].y;
@@ -102,6 +101,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		}
 		else
 			vertex.TexCoords = glm::vec2(0.0f, 0.0f);  
+		vertices.push_back(vertex);
 	}
 	// process indices
 	for(unsigned int i = 0; i < mesh->mNumFaces; i++)
@@ -152,9 +152,6 @@ std::vector<MeshTexture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureT
 			MeshTexture texture;
 			texture.id = TextureFromFile(str.C_Str(), this->_directory);
 			texture.type = typeName;
-			texture.path = str.C_Str();
-			textures.push_back(texture);
-			_textures_loaded.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
 		}
 	}
 	return textures;
@@ -169,7 +166,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory, boo
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
+    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 3);
     if (data)
     {
         GLenum format;
@@ -188,7 +185,6 @@ unsigned int TextureFromFile(const char *path, const std::string &directory, boo
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
         stbi_image_free(data);
     }
     else
