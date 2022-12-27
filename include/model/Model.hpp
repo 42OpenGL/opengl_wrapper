@@ -22,7 +22,7 @@ private:
 	void loadModel(const std::string & path);
 	void processNode(aiNode *node, const aiScene *scene);
 	Mesh processMesh(aiMesh *mesh, const aiScene *scene);
-	std::vector<MeshTexture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, const std::string & typeName);
+	std::vector<MeshTexture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, const std::string typeName);
     
 public:
 	Model(const std::string & path, bool gamma = false);
@@ -112,23 +112,18 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 	} 
 	
 	// process material
-	if(mesh->mMaterialIndex >= 0)
-	{
-		aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-		std::vector<MeshTexture> diffuseMaps = loadMaterialTextures(material,
-											aiTextureType_DIFFUSE, "texture_diffuse");
-		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-		std::vector<MeshTexture> specularMaps = loadMaterialTextures(material, 
-											aiTextureType_SPECULAR, "texture_specular");
-		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-	}
-
-
+	aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
+	std::vector<MeshTexture> diffuseMaps = loadMaterialTextures(material,
+										aiTextureType_DIFFUSE, "texture_diffuse");
+	textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+	std::vector<MeshTexture> specularMaps = loadMaterialTextures(material, 
+										aiTextureType_SPECULAR, "texture_specular");
+	textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	return Mesh(vertices, indices, textures);
 }
 
 
-std::vector<MeshTexture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, const std::string & typeName)
+std::vector<MeshTexture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, const std::string typeName)
 {
 	std::vector<MeshTexture> textures;
 	for(unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -152,6 +147,10 @@ std::vector<MeshTexture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureT
 			MeshTexture texture;
 			texture.id = TextureFromFile(str.C_Str(), this->_directory);
 			texture.type = typeName;
+			// HERE
+			texture.path = str.C_Str();
+			textures.push_back(texture);
+			_textures_loaded.push_back(texture);
 		}
 	}
 	return textures;
@@ -166,7 +165,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory, boo
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 3);
+    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
     if (data)
     {
         GLenum format;
