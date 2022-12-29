@@ -7,7 +7,7 @@ project(
 )
 
 set(CMAKE_CXX_STANDARD 17)
-# set(CMAKE_CXX_FLAGS "-g3")
+ set(CMAKE_CXX_FLAGS "-g3")
 
 if (APPLE)
 	set(GLFW_DIR "glfw-3.3.8")

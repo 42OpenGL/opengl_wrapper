@@ -15,9 +15,8 @@ class ShaderProgram
         explicit ShaderProgram(const std::vector<GLuint> & shaders) 
         {
             this->_shader_program = glCreateProgram();
-            std::vector<GLuint>::const_iterator it = shaders.begin();
-            for (; it < shaders.end() ; it++)
-                putShader(*it);
+            glAttachShader(_shader_program, shaders[0]);
+            glAttachShader(_shader_program, shaders[1]);
         }
         ~ShaderProgram()
         {

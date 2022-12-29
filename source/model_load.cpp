@@ -15,17 +15,13 @@
 #include "../include/WRAPPER/Buffer.hpp"
 #include "../include/WRAPPER/Camera.hpp"
 
-// 3d model loading
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 #include "../include/model/Model.hpp"
 
 int lastX = 0, lastY = 0;
 bool firstMouse = true;
 bool mouse_clicked = false;
-Camera	camera_instance(glm::vec3(10, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1));
+Camera	camera_instance(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 void mouse_move_callback(GLFWwindow * window, double xpos, double ypos);
 void mouse_click_callback(GLFWwindow* window, int button, int action, int mods);
@@ -37,16 +33,18 @@ int main_process()
     GLWindowWrapper window_instance(800, 800, "hi");
 	GLFWwindow* window = window_instance.getWindow();
 
-    Shader          vertex_shader_instance(std::filesystem::path(ROOT_PATH) / "source/basic.vert", GL_VERTEX_SHADER);
-    Shader          fragment_shader_instance(std::filesystem::path(ROOT_PATH) / "source/basic.frag", GL_FRAGMENT_SHADER);
+    Shader          vertex_shader_instance(std::filesystem::path(ROOT_PATH) / "source/assimp_shader.vert", GL_VERTEX_SHADER);
+    Shader          fragment_shader_instance(std::filesystem::path(ROOT_PATH) / "source/assimp_shader.frag", GL_FRAGMENT_SHADER);
     GLuint          vertex_shader_data = vertex_shader_instance.getShader();
     GLuint          fragment_shader_data = fragment_shader_instance.getShader();
 	std::vector<GLuint> shader_vector = {vertex_shader_data, fragment_shader_data};
 	ShaderProgram shader_program_instance(shader_vector);
 	GLuint shader_program_id = shader_program_instance.getShaderProgram();
 	
-	//Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/backpack/backpack.obj");
-	Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/Survival_BackPack_2/Survival_BackPack_2.fbx");
+
+	//Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/new_dragon/smaug.obj");
+	Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/backpack/backpack.obj");
+	//Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/Survival_BackPack_2/Survival_BackPack_2.fbx");
 	//Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/coin/model2_coin.fbx");
 	
 	glEnable(GL_DEPTH_TEST);
@@ -72,13 +70,6 @@ int main_process()
 		GLuint view_location = glGetUniformLocation(shader_program_id, "view");
 		glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
 		
-		glm::mat4 model_local_coord = glm::mat4(1.0f);
-        model_local_coord = glm::translate(model_local_coord, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model_local_coord = glm::scale(model_local_coord, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
-		GLuint model_location = glGetUniformLocation(shader_program_id, "model");
-		glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(model_local_coord));	
-		
-
 		// 그리기
 		glUseProgram(shader_program_id);
 		model_instance.Draw(shader_program_instance);		

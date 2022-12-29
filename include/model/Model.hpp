@@ -3,9 +3,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Mesh.hpp"
 #include <assimp/Importer.hpp>
-#include <stbi/stb_image.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <stbi/stb_image.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 unsigned int TextureFromFile(const char *path, const std::string &directory, bool gamma = false);
@@ -39,7 +39,7 @@ Model::Model(const std::string & filepath, bool gamma)
 void Model::Draw(const ShaderProgram & shader)
 {
 	for(unsigned int i = 0; i < _meshes.size(); i++)
-			_meshes[i].Draw(shader);
+		_meshes[i].Draw(shader);
 }
 
 void Model::loadModel(const std::string & path)
@@ -87,10 +87,13 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		vector.z = mesh->mVertices[i].z; 
 		vertex.Position = vector;
 
-		vector.x = mesh->mNormals[i].x;
-		vector.y = mesh->mNormals[i].y;
-		vector.z = mesh->mNormals[i].z;
-		vertex.Normal = vector;
+		if (mesh->HasNormals())
+		{
+			vector.x = mesh->mNormals[i].x;
+			vector.y = mesh->mNormals[i].y;
+			vector.z = mesh->mNormals[i].z;
+			vertex.Normal = vector;
+		}
 
 		if(mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
 		{
@@ -116,9 +119,9 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 	std::vector<MeshTexture> diffuseMaps = loadMaterialTextures(material,
 										aiTextureType_DIFFUSE, "texture_diffuse");
 	textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-	std::vector<MeshTexture> specularMaps = loadMaterialTextures(material, 
-										aiTextureType_SPECULAR, "texture_specular");
-	textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+	//std::vector<MeshTexture> specularMaps = loadMaterialTextures(material, 
+	//									aiTextureType_SPECULAR, "texture_specular");
+	//textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	return Mesh(vertices, indices, textures);
 }
 
@@ -158,7 +161,7 @@ std::vector<MeshTexture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureT
 
 unsigned int TextureFromFile(const char *path, const std::string &directory, bool gamma)
 {
-    std::string filename = std::string(path);
+    std::string filename(path);
     filename = directory + '/' + filename;
 
     unsigned int textureID;

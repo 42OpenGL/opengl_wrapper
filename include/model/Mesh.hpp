@@ -18,7 +18,7 @@ struct MeshVertex
 
 struct MeshTexture
 {
-	GLuint			id;
+	unsigned int	id;
 	std::string		type;
 	std::string		path;
 };
@@ -33,17 +33,17 @@ private:
 	//  render data
 	GLuint	_VAO, _VBO, _EBO;
 	void setupMesh();
-public:
-	// mesh data
 	vertices_t	vertices;
 	indicies_t	indices;
 	textures_t	textures;
+public:
+	// mesh data
 
-	Mesh(vertices_t vertices, indicies_t indices, textures_t textures);
+	Mesh(vertices_t & vertices, indicies_t & indices, textures_t & textures);
 	void Draw(const ShaderProgram & shaderprogram);
 };
 
-Mesh::Mesh(vertices_t vertices, indicies_t indices, textures_t textures)
+Mesh::Mesh(vertices_t & vertices, indicies_t & indices, textures_t & textures)
 {
 	this->vertices = vertices;
 	this->indices = indices;
@@ -59,8 +59,8 @@ void Mesh::setupMesh()
 	glGenBuffers(1, &_EBO);
 
 	glBindVertexArray(_VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, _VBO);
 
+	glBindBuffer(GL_ARRAY_BUFFER, _VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(MeshVertex), &vertices[0], GL_STATIC_DRAW);  
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _EBO);
@@ -68,15 +68,18 @@ void Mesh::setupMesh()
 					&indices[0], GL_STATIC_DRAW);
 
 	// vertex positions0
-	glEnableVertexAttribArray(0);	
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)0);
+	glEnableVertexAttribArray(0);	
 	// vertex normals
-	glEnableVertexAttribArray(1);	
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, Normal));
+	glEnableVertexAttribArray(1);	
 	// vertex texture coords
-	glEnableVertexAttribArray(2);	
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, TexCoords));
+	glEnableVertexAttribArray(2);
 
+	// HERE
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//
 	glBindVertexArray(0);
 }
 
