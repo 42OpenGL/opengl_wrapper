@@ -40,7 +40,7 @@ int main_process()
 	std::vector<GLuint> shader_vector = {vertex_shader_data, fragment_shader_data};
 	ShaderProgram shader_program_instance(shader_vector);
 	GLuint shader_program_id = shader_program_instance.getShaderProgram();
-	
+
 
 	//Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/new_dragon/smaug.obj");
 	Model	model_instance(std::filesystem::path(ROOT_PATH) / "asset/backpack/backpack.obj");
